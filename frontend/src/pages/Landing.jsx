@@ -8,7 +8,7 @@ import Footer from '../components/Footer.jsx'
 export default function Landing() {
 	return (
 		<div className="min-h-screen bg-gray-950 text-gray-100">
-			<Header />
+			
 			<main>
 				<Hero />
 				<Problem />

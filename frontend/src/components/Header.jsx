@@ -6,15 +6,15 @@ const Header = () => {
   const [mobileFeatures, setMobileFeatures] = useState(false);
 
   const features = [
-    "AI Phishing Detection",
-    "Spam Detection",
-    "Inbox Prioritization",
-    "Email Summarization",
-    "Smart Reply",
-    "Tone & Urgency Detection",
-    "Privacy Shield",
-    "Explainable AI",
-    "Organizational Dashboard",
+    { name: "AI Phishing Detection", link: "/aiphishing" },
+    { name: "Spam Detection", link: "/spamdetection" },
+    { name: "Inbox Prioritization", link: "/inboxprioritization" },
+    { name: "Email Summarization", link: "/emailsummarization" },
+    { name: "Smart Reply", link: "/smartreply" },
+    { name: "Sentiment analysis", link: "/emailsentiment" }, // linked here
+    { name: "Privacy Shield", link: "/privacyshield" },
+    { name: "Explainable AI", link: "/explainableai" },
+    { name: "Organizational Dashboard", link: "/organizationaldashboard" },
   ];
 
   return (
@@ -35,61 +35,38 @@ const Header = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm text-gray-300 relative">
-          <a href="#problem" className="relative group px-2 py-1 font-medium hover:text-white">
-            Problem
-            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#00c2ff] to-[#6a0dad] group-hover:w-full transition-all duration-300"></span>
-          </a>
+          <Link to="/" className="relative group px-2 py-1 font-medium hover:text-white">Home</Link>
 
           {/* Features Dropdown */}
           <div className="relative group">
             <button className="relative flex items-center gap-1 px-2 py-1 font-medium hover:text-white">
               Features ▼
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#00c2ff] to-[#6a0dad] group-hover:w-full transition-all duration-300"></span>
             </button>
             <div className="absolute top-full left-0 mt-2 w-64 bg-[#0a0c14] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
               {features.map((feature, idx) => (
-                <a
+                <Link
                   key={idx}
-                  href="#"
+                  to={feature.link}
                   className="block px-4 py-3 hover:bg-gradient-to-r from-[#00c2ff]/30 to-[#6a0dad]/30 hover:text-white font-medium rounded"
                 >
-                  {feature}
-                </a>
+                  {feature.name}
+                </Link>
               ))}
             </div>
           </div>
 
-          <a href="#solutions" className="relative group px-2 py-1 font-medium hover:text-white">
-            Solutions
-            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-[#00c2ff] to-[#6a0dad] group-hover:w-full transition-all duration-300"></span>
-          </a>
-
-          <a href="#dashboard" className="relative group px-2 py-1 font-medium hover:text-white">
-            Dashboard
-          </a>
+          <Link to="/solutions" className="relative group px-2 py-1 font-medium hover:text-white">Solutions</Link>
+          <Link to="/dashboard" className="relative group px-2 py-1 font-medium hover:text-white">Dashboard</Link>
         </nav>
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center gap-3">
-          <Link
-            to="/login"
-            className="px-4 py-2 rounded-lg border border-[#00c2ff]/50 text-white font-medium hover:bg-[#00c2ff]/10 transition-colors duration-200"
-          >
-            Log in
-          </Link>
-          <Link
-            to="/signup"
-            className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#00c2ff] to-[#6a0dad] text-white font-medium hover:from-[#6a0dad] hover:to-[#00c2ff] transition-all duration-200"
-          >
-            Sign up
-          </Link>
+          <Link to="/login" className="px-4 py-2 rounded-lg border border-[#00c2ff]/50 text-white font-medium hover:bg-[#00c2ff]/10 transition-colors duration-200">Log in</Link>
+          <Link to="/signup" className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#00c2ff] to-[#6a0dad] text-white font-medium hover:from-[#6a0dad] hover:to-[#00c2ff] transition-all duration-200">Sign up</Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 rounded-lg bg-[#0a0c14] text-white"
-          onClick={() => setMobileMenu(!mobileMenu)}
-        >
+        <button className="md:hidden p-2 rounded-lg bg-[#0a0c14] text-white" onClick={() => setMobileMenu(!mobileMenu)}>
           {mobileMenu ? "✕" : "☰"}
         </button>
       </div>
@@ -97,37 +74,25 @@ const Header = () => {
       {/* Mobile Menu */}
       {mobileMenu && (
         <div className="md:hidden bg-[#0a0c14] text-gray-300 border-t border-[#1a1c23]">
-          <a href="#problem" className="block px-4 py-3 hover:bg-[#1a1c23] hover:text-white">Problem</a>
+          <Link to="/" className="block px-4 py-3 hover:bg-[#1a1c23] hover:text-white">Home</Link>
           <div className="px-4 py-3 border-t border-[#1a1c23]">
-            <button
-              className="w-full text-left flex justify-between items-center"
-              onClick={() => setMobileFeatures(!mobileFeatures)}
-            >
+            <button className="w-full text-left flex justify-between items-center" onClick={() => setMobileFeatures(!mobileFeatures)}>
               Features ▼
             </button>
             {mobileFeatures && (
               <div className="mt-2 space-y-1">
                 {features.map((feature, idx) => (
-                  <a
-                    key={idx}
-                    href="#"
-                    className="block px-2 py-2 hover:bg-gradient-to-r from-[#00c2ff]/30 to-[#6a0dad]/30 hover:text-white rounded font-medium"
-                  >
-                    {feature}
-                  </a>
+                  <Link key={idx} to={feature.link} className="block px-2 py-2 hover:bg-gradient-to-r from-[#00c2ff]/30 to-[#6a0dad]/30 hover:text-white rounded font-medium">
+                    {feature.name}
+                  </Link>
                 ))}
               </div>
             )}
           </div>
-          <a href="#solutions" className="block px-4 py-3 hover:bg-[#1a1c23] hover:text-white">Solutions</a>
-          <a href="#dashboard" className="block px-4 py-3 hover:bg-[#1a1c23] hover:text-white">Dashboard</a>
+          <Link to="/solutions" className="block px-4 py-3 hover:bg-[#1a1c23] hover:text-white">Solutions</Link>
+          <Link to="/dashboard" className="block px-4 py-3 hover:bg-[#1a1c23] hover:text-white">Dashboard</Link>
           <Link to="/login" className="block px-4 py-3 hover:bg-[#1a1c23] hover:text-white">Log in</Link>
-          <Link
-            to="/signup"
-            className="block px-4 py-3 bg-gradient-to-r from-[#00c2ff] to-[#6a0dad] text-white rounded mt-2 text-center hover:from-[#6a0dad] hover:to-[#00c2ff]"
-          >
-            Sign up
-          </Link>
+          <Link to="/signup" className="block px-4 py-3 bg-gradient-to-r from-[#00c2ff] to-[#6a0dad] text-white rounded mt-2 text-center hover:from-[#6a0dad] hover:to-[#00c2ff]">Sign up</Link>
         </div>
       )}
     </header>
